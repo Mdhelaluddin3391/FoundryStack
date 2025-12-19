@@ -1,0 +1,308 @@
+/* =========================================================
+   FoundryStack – Global Theme CSS (FINAL)
+   ========================================================= */
+
+/* ================= ROOT VARIABLES ================= */
+
+:root {
+  --bg: #020617;
+  --bg-soft: #02091b;
+
+  --primary: #3b82f6;
+  --accent: #22c55e;
+  --purple: #8b5cf6;
+
+  --border-subtle: rgba(148, 163, 184, 0.2);
+
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --text-soft: #6b7280;
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+
+  --transition-fast: 180ms ease-out;
+  --container-width: 1120px;
+}
+
+/* ================= RESET ================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* ================= PAGE LAYOUT ================= */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ================= GRID GLOW (WORKING) ================= */
+
+.grid-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background: radial-gradient(
+    600px at var(--x, 50%) var(--y, 50%),
+    rgba(59,130,246,0.18),
+    transparent 60%
+  );
+
+  transition: background 0.06s linear;
+}
+
+/* ================= GLOBAL ELEMENTS ================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(18px);
+  background: linear-gradient(
+    to bottom,
+    rgba(2,6,23,0.95),
+    rgba(2,6,23,0.85),
+    transparent
+  );
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 0;
+}
+
+.brand {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 30%;
+  background: conic-gradient(
+    from 210deg,
+    #3b82f6,
+    #22c55e,
+    #8b5cf6,
+    #3b82f6
+  );
+  padding: 2px;
+}
+
+.brand-mark-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: radial-gradient(circle at 20% 0, #0f172a, #020617 65%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.brand-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.brand-sub {
+  font-size: 0.72rem;
+  color: var(--text-soft);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.35rem;
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--primary), var(--purple));
+  transition: width var(--transition-fast);
+}
+
+.nav-links a:hover {
+  color: var(--text-main);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--primary), var(--purple));
+  box-shadow: 0 10px 28px rgba(59,130,246,0.45);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(148,163,184,0.4);
+  background: rgba(15,23,42,0.85);
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+  padding: 2.7rem 0;
+}
+
+.section-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 650;
+}
+
+.section-sub {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+/* ================= CARDS ================= */
+
+.card {
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(148,163,184,0.3);
+  background: radial-gradient(
+    circle at top left,
+    rgba(37,99,235,0.23),
+    rgba(15,23,42,0.98)
+  );
+}
+
+/* ================= FOOTER ================= */
+
+.site-footer {
+  border-top: 1px solid rgba(148,163,184,0.2);
+  background: radial-gradient(circle at top, rgba(15,23,42,0.9), #020617 60%);
+  padding: 2.2rem 0 1.2rem;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.footer-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.35rem;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-links a:hover {
+  color: var(--text-main);
+}
+
+.footer-bottom {
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(148,163,184,0.15);
+  text-align: center;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 960px) {
+  .nav-links {
+    display: none;
+  }
+}

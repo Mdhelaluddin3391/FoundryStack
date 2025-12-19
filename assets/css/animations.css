@@ -1,0 +1,19 @@
+.grid-glow {
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-size: 600px;
+  --glow-color: hsl(210 100% 50% / 0.08);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(
+    circle at var(--glow-x) var(--glow-y),
+    var(--glow-color),
+    transparent 40%
+  );
+}
