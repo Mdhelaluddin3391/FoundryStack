@@ -1,61 +1,39 @@
 /* =========================================================
-   FoundryStack – Global JS (FINAL)
-   Shared across all pages
+   Firmarch – Core JS
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
-  /* ================= FOOTER YEAR ================= */
-
+  // 1. Dynamic Year
   const yearEl = document.getElementById("year");
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ================= GRID GLOW (MOUSE FOLLOW) ================= */
-
+  // 2. Optimized Grid Glow
   const glow = document.querySelector(".grid-glow");
-
-  if (glow && !window.matchMedia("(pointer: coarse)").matches) {
+  if (glow && window.matchMedia("(pointer: fine)").matches) {
     window.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-
-      document.documentElement.style.setProperty("--x", `${x}%`);
-      document.documentElement.style.setProperty("--y", `${y}%`);
+      requestAnimationFrame(() => {
+        glow.style.setProperty("--glow-x", `${e.clientX}px`);
+        glow.style.setProperty("--glow-y", `${e.clientY}px`);
+      });
     });
   }
 
-  /* ================= SCROLL ANIMATIONS ================= */
-
-  const observerOptions = {
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.1,
-  };
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
+  // 3. Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-        obs.unobserve(entry.target); // animate once
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.1 });
 
-  document
-    .querySelectorAll(".fade-up, .fade-in")
-    .forEach((el) => observer.observe(el));
+  document.querySelectorAll(".card, section").forEach(el => observer.observe(el));
 
-  /* ================= NAVBAR ACTIVE LINK ================= */
-
-  const currentPath = window.location.pathname.split("/").pop() || "index.html";
-
-  document.querySelectorAll(".nav-links a").forEach((link) => {
-    const href = link.getAttribute("href");
-    if (href === currentPath) {
-      link.style.color = "var(--text-main)";
-    }
+  // 4. Active Link
+  const path = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    if (link.getAttribute("href") === path) link.classList.add("active");
   });
 });
