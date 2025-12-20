@@ -191,3 +191,70 @@ section { padding: 4rem 0; }
   .hero-title { font-size: 2.5rem; }
   .nav-links { display: none; }
 }
+
+/* ================= MOBILE MENU ================= */
+
+/* Hamburger Button Styling */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.menu-toggle span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-main);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  /* Show the button only on mobile */
+  .menu-toggle {
+    display: flex; 
+  }
+
+  /* Transform links into a dropdown menu */
+  .nav-links {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(2, 6, 23, 0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 2rem 0;
+    gap: 1.5rem;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+  }
+
+  /* Class to show menu when active */
+  .nav-links.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  /* Mobile Link Styling */
+  .nav-links a {
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

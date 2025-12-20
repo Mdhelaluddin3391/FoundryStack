@@ -36,4 +36,22 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".nav-links a").forEach(link => {
     if (link.getAttribute("href") === path) link.classList.add("active");
   });
+
+  // 5. Mobile Menu Toggle
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+      });
+    });
+  }
+
 });
